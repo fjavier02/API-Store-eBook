@@ -1,4 +1,4 @@
-//conection whit data base
+//conection with data base
 
 var knex = require('knex')({
     client: 'mysql',

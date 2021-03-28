@@ -116,7 +116,6 @@ class Controller {
 
     readeBookID(req, res){
         const { id } = req.body;
-        const { category } = req.params;
         let list = [];
         let articleCat = [];
         database("eBook").join("authors", "eBook.idAuthor", "=", "authors.idAuthor").where({id:id}).asCallback(function(err, data) {
@@ -268,6 +267,13 @@ class Controller {
             successRedirect: "/",
             failureRedirect: "/"
         });
+    }
+    loginFail(req, res){
+        if(!req.user){
+            res.send({login: req.isAuthenticated(), Fail: "Username or password invalid"})
+        }else{
+            res.redirect('/');
+        }
     }
 
     //Sign-up API

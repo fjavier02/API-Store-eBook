@@ -43,11 +43,13 @@ router.put('/api/admin/eBook',Controller.editeBook)
 router.delete('/api/admin/eBook',Controller.deleteeBook)
     
 //login API
-router.post("/api/login", passport.authenticate('local', {
+router.post('/api/login', passport.authenticate('local', {
     //Receive credentials and log in
     successRedirect: "/",
-    failureRedirect: "/"
+    failureRedirect: "/api/loginFail"
 }))
+
+router.get('/api/loginFail', Controller.loginFail)
 
 //Sign-up API
 router.post('/api/sign-up',Controller.signUp)

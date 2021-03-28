@@ -20,21 +20,21 @@ database.schema.raw('CREATE DATABASE IF NOT EXISTS Store;').then(data =>{
 });
 
 //Create Table Authors
-database.schema.raw('USE store;').raw('CREATE TABLE IF NOT EXISTS authors(idAuthor INT AUTO_INCREMENT NOT NULL PRIMARY KEY,  name VARCHAR(65) NOT NULL,  picture VARCHAR(255) NOT NULL);').then(data =>{
+database.schema.raw('USE Store;').raw('CREATE TABLE IF NOT EXISTS authors(idAuthor INT AUTO_INCREMENT NOT NULL PRIMARY KEY,  name VARCHAR(65) NOT NULL,  picture VARCHAR(255) NOT NULL);').then(data =>{
     console.log({message: "Table Authors created with success!"})
 }).catch(error =>{
     console.log(error)
 })
 
 //Create Table Ebooks
-database.schema.raw('USE store;').raw('CREATE TABLE IF NOT EXISTS eBook(  id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,  idAuthor INT(11) NOT NULL, category VARCHAR(65) NOT NULL,  title VARCHAR(255) NOT NULL, summary TEXT NOT NULL,  firstParagraph VARCHAR(255) NOT NULL,  body VARCHAR(255) NOT NULL,  CONSTRAINT idAuthor FOREIGN KEY (idAuthor) REFERENCES authors (idAuthor));').then(data =>{
+database.schema.raw('USE Store;').raw('CREATE TABLE IF NOT EXISTS eBook(  id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,  idAuthor INT(11) NOT NULL, category VARCHAR(65) NOT NULL,  title VARCHAR(255) NOT NULL, summary TEXT NOT NULL,  firstParagraph VARCHAR(255) NOT NULL,  body VARCHAR(255) NOT NULL,  CONSTRAINT idAuthor FOREIGN KEY (idAuthor) REFERENCES authors (idAuthor));').then(data =>{
     console.log({message: "Table Ebooks created with success!"})
 }).catch(error =>{
     console.log(error)
 })
 
 //Create Table Users
-database.schema.raw('USE store;').raw('CREATE TABLE IF NOT EXISTS users( id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY, username VARCHAR(65) NOT NULL,  email VARCHAR(100) NOT NULL UNIQUE,  password VARCHAR(65) NOT NULL);').then(data =>{
+database.schema.raw('USE Store;').raw('CREATE TABLE IF NOT EXISTS users( id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY, username VARCHAR(65) NOT NULL,  email VARCHAR(100) NOT NULL UNIQUE,  password VARCHAR(65) NOT NULL);').then(data =>{
     console.log({message: "Table Users created with success!"})
 }).catch(error =>{
     console.log(error)
