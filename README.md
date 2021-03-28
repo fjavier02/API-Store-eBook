@@ -1,7 +1,7 @@
 # Welcome to API Store eBook 👋
 [![Version](https://img.shields.io/npm/v/app.js.svg)](https://www.npmjs.com/package/app.js)
 [![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)](#)
-[![Twitter: fjavier02](https://img.shields.io/twitter/follow/fjavier02.svg?style=social)](https://twitter.com/fjavier02)
+[![Twitter: fjavier02](https://img.shields.io/twitter/follow/francisco_kurt.svg?style=social)](https://twitter.com/francisco_kurt)
 
 > API Ebook
 
