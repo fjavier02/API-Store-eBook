@@ -1,12 +1,7 @@
 const expresss = require('express');
 const database = require('./database/connection');
-const TaskController = require('./src/controllers/Controller');
 const router = require('./src/routes/routes');
 const bodyParser = require('body-parser');
-const passport = require('passport');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const LocalStrategy = require('passport-local').Strategy;
 const app = expresss();
 
 app.use(bodyParser.json());

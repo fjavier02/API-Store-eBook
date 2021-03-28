@@ -1,4 +1,3 @@
-const { req, res } = require('express')
 const database = require('../../database/connection')
 const passport = require('passport');
 
