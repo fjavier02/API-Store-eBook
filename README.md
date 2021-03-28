@@ -46,7 +46,7 @@ Documentation of clients: http://knexjs.org/#Installation-client
 ### CRUD eBook
 - ``Method get('/api/admin/eBook')`` 
 - ``Method get('/api/admin/eBook/id')`` req.body =  { id }
-- ``Method get('/api/admin/eBook/:category')`` req.body = { category }
+- ``Method get('/api/admin/eBook/:category')`` req.params = { category }
 - ``Method post('/api/admin/eBook')`` req.body = { idAuthor, category, title, summary, firstParagraph, body }
 - ``Method put('/api/admin/eBook')`` req.body = { id, category, title, summary, firstParagraph, body }
 - ``Method delete('/api/admin/eBook')`` req.body = { id }
