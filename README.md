@@ -20,6 +20,7 @@ npm run start
 Settings for your database:
 file: `./database/connection.js` 
 
+```js
 var knex = require('knex')({
     client: 'mysql', //mysql, pg, sqlite3 or postgres, you can modify the client of your choice 
     connection: {
@@ -29,6 +30,7 @@ var knex = require('knex')({
         password : 'your_password'
      }
 });
+```
 
 Documentation of clients: http://knexjs.org/#Installation-client
 
