@@ -72,7 +72,7 @@ Documentation of clients: http://knexjs.org/#Installation-client
 * Website: francisco.com
 * email: [franciscolopez1995@gmail.com](franciscolopez1995@gmail.com)
 * Github: [@fjavier02](https://github.com/fjavier02)
-* LinkedIn: [@fjavier02](https://linkedin.com/in/fjavier02)
+* LinkedIn: [@francisco-lopez](https://www.linkedin.com/in/francisco-lopez-b33a64110/)
 
 ## Show your support
 
