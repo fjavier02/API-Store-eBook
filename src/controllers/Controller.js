@@ -1,6 +1,10 @@
 const database = require('../../database/connection')
 const passport = require('passport');
+const bcrypt = require('bcrypt')
 
+const saltRounds = 10;
+const myPassword = "Store-Book";
+const myOtherPassword = "Other-Store-Book";
 
 
 class Controller {
@@ -278,11 +282,27 @@ class Controller {
     //Sign-up API
     signUp(req,res) {
         const { username, email, password } = req.body;
-        database.insert(req.body).into("users").asCallback(function(err, rows) {
-            if (err) return console.error(err);
+        bcrypt.hash(myPassword, saltRounds, function(err, hash) {
+            if(err) console.log(err)
+            let user = { 
+                "username": req.body.username,
+                "email": req.body.email,
+                "password":  hash
+            }
+            //console.log(user)
+        database.insert(user).into("users").asCallback(function(err, rows) {
+            if (err) return console.error(err);  /* {
+                if(err.errno == 1062) {
+                    console.log("User Duplicate")
+                    res.json({"error": "User Duplicate"})
+                }
+            }else{
+                return console.error(err);  
+            }  */
             console.log("Record created successfully")
             res.json("Record created successfully")
         })
+        });
         
     }
     resetPassword(req,res) {

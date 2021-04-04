@@ -6,6 +6,11 @@ const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt')
+
+const saltRounds = 10;
+const myPassword = "Store-Book";
+const myOtherPassword = "Other-Store-Book";
 
 router.use(cookieParser('secret'));
 router.use(session({
@@ -22,8 +27,8 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  database('users').where({id:id}).then(data => {
-    done(null, {id:data[0].id, name:data[0].username});
+  database.select('id', 'username').table('users').where({id:id}).then(data => {
+    done(null, data[0]);
   })
 });
 
@@ -62,18 +67,31 @@ router.get('/api/logout', function (req, res) {
 });
 
 
+/* bcrypt.hash(myPassword, saltRounds, function(err, hash) {
+    if(err) console.log(err)
+    console.log(hash)
+}); */
+
+/* bcrypt.compare(myPassword, hash, function(err, result) {
+    if(err)console.log(err);
+    console.log(result)
+}); */
 
 passport.use(new LocalStrategy({ usernameField: 'username', passwordField: 'password'}, function(username, password, done) {
     database("users").where({ username : username}).then(data =>  {
         if(data.length == 1){
-            if(username === data[0].username && password === data[0].password){
-                console.log("login " + data[0].username);
-                return done(null,{id:data[0].id, name:data[0].username});
-                
-            }else {
-                console.log("Username or password invalid")
-                return done(null, false, { message: 'Username or password invalid' });
-            }
+            bcrypt.compare(myPassword, data[0].password, function(err, result) {
+                if(err)console.log(err);
+                if(username === data[0].username && result === true){
+                    console.log("login " + data[0].username);
+                    return done(null,{id:data[0].id, name:data[0].username});
+                    
+                }else {
+                    console.log("Username or password invalid")
+                    return done(null, false, { message: 'Username or password invalid' });
+                }
+            });
+            
         }else {
             console.log("Username or password invalid")
             return done(null, false, { message: 'Username or password invalid' });
