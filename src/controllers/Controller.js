@@ -1,6 +1,11 @@
 const database = require('../../database/connection')
 const passport = require('passport');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const express = require("express");
+const router = express.Router();
+
+const llave = "Store-Book-Password"
 
 const saltRounds = 10;
 const myPassword = "Store-Book";
@@ -282,7 +287,7 @@ class Controller {
     //Sign-up API
     signUp(req,res) {
         const { username, email, password } = req.body;
-        bcrypt.hash(myPassword, saltRounds, function(err, hash) {
+        bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
             if(err) console.log(err)
             let user = { 
                 "username": req.body.username,

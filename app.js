@@ -3,6 +3,7 @@ const database = require('./database/connection');
 const router = require('./src/routes/routes');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken')
 const app = expresss();
 
 
@@ -11,11 +12,63 @@ const saltRounds = 10;
 const myPassword = "Store-Book";
 const myOtherPassword = "Other-Store-Book";
 
+const llave = "Store-Book Password"
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
+app.set('llave', llave);
+dato = 'Francisco';
 
+let hash = '$2b$10$6giE5XBZpol7mCsREGxbmOoMER3ziv/G1LsBrEp0XxSq4XLEUpgYe';
 
+/* bcrypt.hash(myPassword, saltRounds, function(err, hash) {
+    if(err) console.log(err)
+    hash = hash
+    console.log(hash)
+});
 
+bcrypt.compare(myPassword, hash, function(err, result) {
+    if(err)console.log(err);
+    console.log(result)
+}); */
+
+app.get('/lol3', (req,res)=>{
+
+    bcrypt.hash(myPassword, saltRounds, function(err, hash) {
+        if(err) console.log(err)
+        hash = hash
+        console.log(hash)
+        res.json(hash)
+    });
+    /* token  = jwt.sign( {  data : dato, iat: Math.floor(Date.now() / 1000)} , llave, { expiresIn: '1m' } ) ;  
+
+    console.log({'hash':token, "fecha":Date()}) // Francisco
+    res.json({'hash':token, "fecha":Date()}) */
+});
+
+app.get('/lol2', (req,res)=>{
+    bcrypt.compare(myPassword, hash, function(err, result) {
+        if(err)console.log(err);
+        console.log(result)
+        res.json(result)
+    });
+    
+    /* jwt.verify(token, llave, function(err, decoded) {
+        if(err){ 
+            err = {
+                name: 'TokenExpiredError',
+                message:'Token expired',
+                expireAt: err.expiredAt
+            }
+            console.log(err)
+            res.send(err)
+        }else{
+            console.log({'hash':decoded, "fecha":Date()}) // Francisco
+            res.json({'hash':decoded, "fecha":Date()})
+        }
+    }); */
+});
 
 
 //Create Database Store

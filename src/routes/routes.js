@@ -7,11 +7,13 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const saltRounds = 10;
 const myPassword = "Store-Book";
 const myOtherPassword = "Other-Store-Book";
 
+const llave = "Store-Book-Password"
 router.use(cookieParser('secret'));
 router.use(session({
     secret: 'secret',
@@ -80,7 +82,7 @@ router.get('/api/logout', function (req, res) {
 passport.use(new LocalStrategy({ usernameField: 'username', passwordField: 'password'}, function(username, password, done) {
     database("users").where({ username : username}).then(data =>  {
         if(data.length == 1){
-            bcrypt.compare(myPassword, data[0].password, function(err, result) {
+            bcrypt.compare(password, data[0].password, function(err, result) {
                 if(err)console.log(err);
                 if(username === data[0].username && result === true){
                     console.log("login " + data[0].username);
