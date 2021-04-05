@@ -66,21 +66,10 @@ router.get('/api/logout', function (req, res) {
     res.redirect('/');
 });
 
-
-/* bcrypt.hash(myPassword, saltRounds, function(err, hash) {
-    if(err) console.log(err)
-    console.log(hash)
-}); */
-
-/* bcrypt.compare(myPassword, hash, function(err, result) {
-    if(err)console.log(err);
-    console.log(result)
-}); */
-
 passport.use(new LocalStrategy({ usernameField: 'username', passwordField: 'password'}, function(username, password, done) {
     database("users").where({ username : username}).then(data =>  {
         if(data.length == 1){
-            bcrypt.compare(myPassword, data[0].password, function(err, result) {
+            bcrypt.compare(password, data[0].password, function(err, result) {
                 if(err)console.log(err);
                 if(username === data[0].username && result === true){
                     console.log("login " + data[0].username);

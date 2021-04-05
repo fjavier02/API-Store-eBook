@@ -282,7 +282,7 @@ class Controller {
     //Sign-up API
     signUp(req,res) {
         const { username, email, password } = req.body;
-        bcrypt.hash(myPassword, saltRounds, function(err, hash) {
+        bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
             if(err) console.log(err)
             let user = { 
                 "username": req.body.username,
